@@ -7,4 +7,15 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="hito.png" />
+    <None Remove="map.png" />
+    <None Remove="mapa.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="map.png" />
+    <Resource Include="mapa.jpg" />
+  </ItemGroup>
+
 </Project>

@@ -20,9 +20,19 @@ namespace Csharp_Votos
     /// </summary>
     public partial class MainWindow : Window
     {
+        const int TOTALPOPULATION = 6921267;
         public MainWindow()
         {
             InitializeComponent();
+            Loaded += totalPopulation;
         }
+
+        //Metodo para establecer el texto de la poblacion mundial
+        private void totalPopulation(object sender, RoutedEventArgs e)
+        {
+            tbxPopulation.Text = TOTALPOPULATION.ToString();
+        }
+
+        
     }
 }

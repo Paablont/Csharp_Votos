@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Csharp_Votos"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Ventana Principal" Height="450" Width="800">
+    <Grid Margin="0,0,0,-6">
+        <TabControl Margin="218,132,103,32" TabStripPlacement="Left">
+            <TabItem Header="Previuos Data">
+                <Grid>
+                    <Label x:Name="txtPopulation" Content="Population" HorizontalAlignment="Left" Margin="80,52,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="txtAbsention" Content="Absention Votes" HorizontalAlignment="Left" Margin="51,90,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="txtNullVotes" Content="Null votes" HorizontalAlignment="Left" Margin="84,134,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="tbxPopulation" IsReadOnly="True" HorizontalAlignment="Left" Height="24" Margin="187,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127"/>
+                    <TextBox x:Name="tbxAbsent" HorizontalAlignment="Left" Height="26" Margin="187,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127"/>
+                    <TextBox x:Name="tbxNull" IsReadOnly="True" HorizontalAlignment="Left" Height="29" Margin="187,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127"/>
+                    <Button x:Name="btnSaveData" Content="Save" HorizontalAlignment="Left" Height="43" Margin="116,194,0,0" VerticalAlignment="Top" Width="86"/>
 
+                </Grid>
+            </TabItem>
+            <TabItem Header="Parties Managment" IsEnabled="False">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Simulation" IsEnabled="False">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+        <Label Content="MADRID ELECTIONS" HorizontalAlignment="Left" Margin="218,46,0,0" VerticalAlignment="Top" FontSize="36" FontFamily="Segoe UI Semibold"/>
+        <Image HorizontalAlignment="Left" Height="165" Margin="10,10,0,0" VerticalAlignment="Top" Width="180" Source="/map.png"/>
     </Grid>
 </Window>
