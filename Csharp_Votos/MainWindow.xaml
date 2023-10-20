@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Ventana Principal" Height="450" Width="800">
     <Grid Margin="0,0,0,-6">
-        <TabControl Margin="218,132,103,32" TabStripPlacement="Left">
+        <TabControl Margin="218,132,103,32" TabStripPlacement="Left" Name="tabControl">
             <TabItem Header="Previuos Data">
                 <Grid>
                     <Label x:Name="txtPopulation" Content="Population" HorizontalAlignment="Left" Margin="80,52,0,0" VerticalAlignment="Top"/>
@@ -16,7 +16,7 @@
                     <TextBox x:Name="tbxPopulation" IsReadOnly="True" HorizontalAlignment="Left" Height="24" Margin="187,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127"/>
                     <TextBox x:Name="tbxAbsent" HorizontalAlignment="Left" Height="26" Margin="187,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127"/>
                     <TextBox x:Name="tbxNull" IsReadOnly="True" HorizontalAlignment="Left" Height="29" Margin="187,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127"/>
-                    <Button x:Name="btnSaveData" Content="Save" HorizontalAlignment="Left" Height="43" Margin="116,194,0,0" VerticalAlignment="Top" Width="86"/>
+                    <Button x:Name="btnSaveData" Content="Save" HorizontalAlignment="Left" Height="43" Margin="116,194,0,0" VerticalAlignment="Top" Width="86" Click="btnSaveData_Click"/>
 
                 </Grid>
             </TabItem>
