@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Csharp_Votos.Domain
 {
-    internal class Datos
+    internal class Parties
     {
-        
     }
 }

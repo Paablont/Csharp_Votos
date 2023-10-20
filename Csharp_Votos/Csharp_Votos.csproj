@@ -18,9 +18,4 @@
     <Resource Include="mapa.jpg" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Persistence\" />
-    <Folder Include="View\" />
-  </ItemGroup>
-
 </Project>
