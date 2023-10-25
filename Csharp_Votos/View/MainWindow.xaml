@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Ventana Principal" Height="450" Width="800">
     <Grid Margin="0,0,0,-6">
-        <TabControl Margin="218,132,103,32" TabStripPlacement="Left" Name="tabControl">
-            <TabItem Header="Previuos Data">
+        <TabControl Margin="125,68,80,15" TabStripPlacement="Left" Name="tabControl">
+            <TabItem Header="Previuos Data" Height="24" Margin="-2,-2,0,0" VerticalAlignment="Top">
                 <Grid>
                     <Label x:Name="txtPopulation" Content="Population" HorizontalAlignment="Left" Margin="80,52,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="txtAbsention" Content="Absention Votes" HorizontalAlignment="Left" Margin="51,90,0,0" VerticalAlignment="Top"/>
@@ -21,13 +21,42 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Parties Managment" IsEnabled="False">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dgvPeople" AutoGenerateColumns="False" IsReadOnly="True" Margin="10,10,207,10" SelectionChanged="dgvPeople_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Acronym" Binding="{Binding name}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Name" Binding="{Binding age}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="President" Binding="{Binding age}" Width="*"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button x:Name="btnSaveParty" Content="Save" HorizontalAlignment="Left" Height="37" Margin="316,214,0,0" VerticalAlignment="Top" Width="97"/>
+                    <TextBox x:Name="tbAcronym" HorizontalAlignment="Left" Margin="316,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="txtAcronym" Content="Acronym" HorizontalAlignment="Left" Margin="347,19,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="txtPartyName" Content="Party name" HorizontalAlignment="Left" Margin="347,63,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="tbPartyName" HorizontalAlignment="Left" Margin="316,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Grid Background="#FFE5E5E5">
+                        <DataGrid x:Name="dvgParties" AutoGenerateColumns="False" IsReadOnly="True" Margin="10,10,207,10" SelectionChanged="dgvPeople_SelectionChanged">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Acronym" Binding="{Binding Acronym}" Width="*"/>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                                <DataGridTextColumn Header="President" Binding="{Binding PresidentName}" Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button x:Name="btnSaveParty1" Content="Save" HorizontalAlignment="Left" Height="37" Margin="316,214,0,0" VerticalAlignment="Top" Width="97"/>
+                        <TextBox x:Name="tbAcronym1" HorizontalAlignment="Left" Margin="304,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                        <Label x:Name="txtAcronym1" Content="Acronym" HorizontalAlignment="Left" Margin="335,37,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="txtPartyName1" Content="Party name" HorizontalAlignment="Left" Margin="330,86,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="tbPartyName1" HorizontalAlignment="Left" Margin="304,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                        <Label x:Name="President_name" Content="President name" HorizontalAlignment="Left" Margin="319,141,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="tbPresidentName" HorizontalAlignment="Left" Margin="304,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
+                    </Grid>
+                </Grid>
+
             </TabItem>
             <TabItem Header="Simulation" IsEnabled="False">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>
-        <Label Content="MADRID ELECTIONS" HorizontalAlignment="Left" Margin="218,46,0,0" VerticalAlignment="Top" FontSize="36" FontFamily="Segoe UI Semibold"/>
-        <Image HorizontalAlignment="Left" Height="165" Margin="10,10,0,0" VerticalAlignment="Top" Width="180" Source="/map.png"/>
+        <Label Content="MADRID ELECTIONS" HorizontalAlignment="Left" Margin="328,10,0,0" VerticalAlignment="Top" FontSize="36" FontFamily="Segoe UI Semibold"/>
     </Grid>
 </Window>

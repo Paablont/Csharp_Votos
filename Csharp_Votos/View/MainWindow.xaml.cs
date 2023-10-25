@@ -31,6 +31,7 @@ namespace Csharp_Votos
             datesPre = new DatesVotes();
             this.DataContext = datesPre; //binding
             Loaded += totalPopulationChange;
+            
 
             //When the tbxAbsent  changes, tbxNull refresh with update null vote count
             tbxAbsent.TextChanged += nullVoteChange;
@@ -79,6 +80,14 @@ namespace Csharp_Votos
             string absentString = tbxAbsent.Text;
             tbxNull.Text = datesPre.votesNullCalculate(absentString).ToString();
         }
+
+        //***************************************************//
+        //Datagrid functions
+        private void dgvPeople_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
 
     }
 }
