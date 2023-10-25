@@ -42,13 +42,13 @@
                                 <DataGridTextColumn Header="President" Binding="{Binding PresidentName}" Width="*"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button x:Name="btnSaveParty1" Content="Save" HorizontalAlignment="Left" Height="37" Margin="316,214,0,0" VerticalAlignment="Top" Width="97"/>
+                        <Button x:Name="btnSaveParty1" Content="Save" HorizontalAlignment="Left" Height="37" Margin="316,214,0,0" VerticalAlignment="Top" Width="97" Click="btnSaveParty_Click"/>
                         <TextBox x:Name="tbAcronym1" HorizontalAlignment="Left" Margin="304,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                         <Label x:Name="txtAcronym1" Content="Acronym" HorizontalAlignment="Left" Margin="335,37,0,0" VerticalAlignment="Top"/>
                         <Label x:Name="txtPartyName1" Content="Party name" HorizontalAlignment="Left" Margin="330,86,0,0" VerticalAlignment="Top"/>
                         <TextBox x:Name="tbPartyName1" HorizontalAlignment="Left" Margin="304,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                         <Label x:Name="President_name" Content="President name" HorizontalAlignment="Left" Margin="319,141,0,0" VerticalAlignment="Top"/>
-                        <TextBox x:Name="tbPresidentName" HorizontalAlignment="Left" Margin="304,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
+                        <TextBox x:Name="tbPresidentName" HorizontalAlignment="Left" Margin="305,172,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     </Grid>
                 </Grid>
 

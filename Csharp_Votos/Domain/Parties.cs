@@ -10,21 +10,29 @@ namespace Csharp_Votos.Domain
    
     internal class Parties
     {
-        public String Name {  get; set; }
-        public String Acronym { get; set; }
-        public String PresidentName {  get; set; }
+        public String name {  get; set; }
+        public String acronym { get; set; }
+        public String presidentName {  get; set; }
 
-        public PartiesManager pm { get; set; }
+        
+
 
         //Constructor
         public Parties(string name, string acronym,string presidentName)
         {
-            this.Name = name;
-            this.Acronym = acronym;
-            this.PresidentName = presidentName;
-           
+            this.name = name;
+            this.acronym = acronym;
+            this.presidentName = presidentName;
+            
+
         }
+
+        public Parties() {
+            
+        }
+
         
+
 
 
     }

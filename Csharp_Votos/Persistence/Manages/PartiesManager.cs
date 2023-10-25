@@ -12,18 +12,16 @@ namespace Csharp_Votos.Persistence.Manages
     
     internal class PartiesManager
     {
-        public List<Parties> listParties { get; set; }
-
-        
+        public List<Parties> listParties { get; set; }        
 
         public PartiesManager()
         {
             listParties = new List<Parties>();
         }
 
-        public void readPeople()
+        public void addParties(string acronym, string name,string presidentName)
         {
-
+            listParties.Add(new Parties(acronym, name, presidentName));
         }
     }
 }

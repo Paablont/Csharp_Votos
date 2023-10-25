@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Csharp_Votos.Domain;
+using Csharp_Votos.Persistence.Manages;
 
 namespace Csharp_Votos
 {
@@ -23,18 +24,21 @@ namespace Csharp_Votos
     public partial class MainWindow : Window
     {
         public DatesVotes datesPre { get; set; }
-
+        Parties party;
+        PartiesManager pm { get; set; }
         public MainWindow()
         {
 
             InitializeComponent();
             datesPre = new DatesVotes();
             this.DataContext = datesPre; //binding
+            
             Loaded += totalPopulationChange;
             
-
             //When the tbxAbsent  changes, tbxNull refresh with update null vote count
             tbxAbsent.TextChanged += nullVoteChange;
+
+            party = new Parties();
 
 
 
@@ -81,11 +85,21 @@ namespace Csharp_Votos
             tbxNull.Text = datesPre.votesNullCalculate(absentString).ToString();
         }
 
-        //***************************************************//
-        //Datagrid functions
+        //*************** DATAGRID FUNCTIONS *****************//
+        
+        //Select one field in the Datagrid
         private void dgvPeople_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
 
+        }
+
+        //Button that add a new party to the datagrid
+        private void btnSaveParty_Click(object sender, RoutedEventArgs e)
+        {
+             
+            pm.addParties(tbAcronym.Text,tbPartyName.Text,tbPartyName.Text);
+            dvgParties.Items.Refresh();
         }
 
 
