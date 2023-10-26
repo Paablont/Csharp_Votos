@@ -28,7 +28,7 @@ namespace Csharp_Votos
         PartiesManager pm { get; set; }
         public MainWindow()
         {
-
+            
             InitializeComponent(); 
             pm = new PartiesManager();
             datesPre = new DatesVotes();
@@ -39,7 +39,13 @@ namespace Csharp_Votos
             //When the tbxAbsent  changes, tbxNull refresh with update null vote count
             tbxAbsent.TextChanged += nullVoteChange;
 
+            //Disable delete button from the 2nd tab
+            
+            btnDeleteParty.Visibility = Visibility.Hidden;
+
         }
+
+        //*************** FIRST TAB FUNCTIONS *****************//
 
         //When click on Button saves data
         private void btnSaveData_Click(object sender, RoutedEventArgs e)
@@ -55,13 +61,12 @@ namespace Csharp_Votos
             datesPre.VotesValid = votesValid;
             datesPre.VotesAbst = votesAbst;
             datesPre.VotesNull = votesNull;
+
             if(datesPre.VotesAbst == 0) {
                 MessageBox.Show("The absent votes can not be 0");
             }
             else
             {
-                MessageBox.Show(datesPre.ToString());
-
                 //When  you press the button change to the second tab
                 MessageBox.Show("Data save properly");
                 tabControl.SelectedIndex = 1;
@@ -82,19 +87,17 @@ namespace Csharp_Votos
             tbxNull.Text = datesPre.votesNullCalculate(absentString).ToString();
         }
 
-        //*************** DATAGRID FUNCTIONS *****************//
+        //*************** SECOND TAB FUNCTIONS *****************//
         
         //Select one field in the Datagrid
         private void dgvPeople_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (dvgParties.SelectedItem != null)
+            btnDeleteParty.Visibility = Visibility.Visible;
+
+            if(dvgParties.SelectedItem == null )
             {
-                btnDeleteParty.IsEnabled = true;
-                btnDeleteParty.Visibility = Visibility.Visible;
-            }
-            else {
-                btnDeleteParty.Visibility = Visibility.Collapsed; 
-                btnDeleteParty.IsEnabled = false; 
+                btnDeleteParty.Visibility = Visibility.Hidden;
+
             }
 
         }
@@ -107,6 +110,9 @@ namespace Csharp_Votos
                 pm.addParties(tbxAcronym.Text, tbxPartyName.Text, tbxPresidentName.Text);
                 
                 dvgParties.Items.Refresh();
+                tbxAcronym.Text = "";
+                tbxPartyName.Text = "";
+                tbxPresidentName.Text = "";
             }
             catch(NullReferenceException ex)
             {
@@ -120,7 +126,6 @@ namespace Csharp_Votos
         {
             try
             {
-                
                 foreach (Parties p in dvgParties.SelectedItems)
                 {
                     pm.deleteParties(p);
