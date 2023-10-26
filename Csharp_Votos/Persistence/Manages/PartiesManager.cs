@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Documents;
 
 namespace Csharp_Votos.Persistence.Manages
@@ -19,9 +20,29 @@ namespace Csharp_Votos.Persistence.Manages
             listParties = new List<Parties>();
         }
 
+        public List<Parties> getListParties()
+        {
+            return listParties;
+        }
         public void addParties(string acronym, string name,string presidentName)
         {
-            listParties.Add(new Parties(acronym, name, presidentName));
+            try
+            {
+                if(acronym.Equals("") || name.Equals("") || presidentName.Equals(""))
+                {
+                    MessageBox.Show("Por favor, rellena todos los campos");
+
+                }
+                else
+                {
+                    listParties.Add(new Parties(acronym, name, presidentName));
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Algo ha fallado");
+            }
+            
         }
     }
 }

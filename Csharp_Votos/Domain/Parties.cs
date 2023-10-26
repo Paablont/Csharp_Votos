@@ -15,8 +15,6 @@ namespace Csharp_Votos.Domain
         public String presidentName {  get; set; }
 
         
-
-
         //Constructor
         public Parties(string name, string acronym,string presidentName)
         {
@@ -25,10 +23,6 @@ namespace Csharp_Votos.Domain
             this.presidentName = presidentName;
             
 
-        }
-
-        public Parties() {
-            
         }
 
         

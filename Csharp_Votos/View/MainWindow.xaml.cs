@@ -29,18 +29,15 @@ namespace Csharp_Votos
         public MainWindow()
         {
 
-            InitializeComponent();
+            InitializeComponent(); 
+            pm = new PartiesManager();
             datesPre = new DatesVotes();
             this.DataContext = datesPre; //binding
-            
+            dvgParties.ItemsSource = pm.getListParties();
             Loaded += totalPopulationChange;
             
             //When the tbxAbsent  changes, tbxNull refresh with update null vote count
             tbxAbsent.TextChanged += nullVoteChange;
-
-            party = new Parties();
-
-
 
         }
 
@@ -90,16 +87,47 @@ namespace Csharp_Votos
         //Select one field in the Datagrid
         private void dgvPeople_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            if (dvgParties.SelectedItem != null)
+            {
+                btnDeleteParty.IsEnabled = true;
+            }
+            else { btnDeleteParty.IsEnabled = false; }
 
         }
 
         //Button that add a new party to the datagrid
         private void btnSaveParty_Click(object sender, RoutedEventArgs e)
         {
-             
-            pm.addParties(tbAcronym.Text,tbPartyName.Text,tbPartyName.Text);
-            dvgParties.Items.Refresh();
+            try
+            {
+                pm.addParties(tbxAcronym.Text, tbxPartyName.Text, tbxPresidentName.Text);
+                
+                dvgParties.Items.Refresh();
+            }
+            catch(NullReferenceException ex)
+            {
+                MessageBox.Show("WOOWO");
+            }
+            
+        }
+
+        //Button that add a new party to the datagrid
+        private void btnDeleteParty_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                foreach (Parties p in dvgParties.SelectedItems)
+                {
+                    
+                }
+
+                dvgParties.Items.Refresh();
+            }
+            catch (NullReferenceException ex)
+            {
+                MessageBox.Show("Rellena todos los campos para crear un partido");
+            }
+
         }
 
 
