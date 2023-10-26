@@ -24,6 +24,11 @@ namespace Csharp_Votos.Persistence.Manages
         {
             return listParties;
         }
+
+        public void setListParties(List<Parties> newList)
+        {
+            listParties = newList;
+        }
         public void addParties(string acronym, string name,string presidentName)
         {
             try
@@ -43,6 +48,11 @@ namespace Csharp_Votos.Persistence.Manages
                 Console.WriteLine("Algo ha fallado");
             }
             
+        }
+
+        public void deleteParties(Parties p)
+        {
+            listParties.Remove(p);
         }
     }
 }

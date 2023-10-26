@@ -90,8 +90,12 @@ namespace Csharp_Votos
             if (dvgParties.SelectedItem != null)
             {
                 btnDeleteParty.IsEnabled = true;
+                btnDeleteParty.Visibility = Visibility.Visible;
             }
-            else { btnDeleteParty.IsEnabled = false; }
+            else {
+                btnDeleteParty.Visibility = Visibility.Collapsed; 
+                btnDeleteParty.IsEnabled = false; 
+            }
 
         }
 
@@ -106,7 +110,7 @@ namespace Csharp_Votos
             }
             catch(NullReferenceException ex)
             {
-                MessageBox.Show("WOOWO");
+                MessageBox.Show("Algo ha fallado");
             }
             
         }
@@ -116,16 +120,17 @@ namespace Csharp_Votos
         {
             try
             {
+                
                 foreach (Parties p in dvgParties.SelectedItems)
                 {
-                    
+                    pm.deleteParties(p);
                 }
 
                 dvgParties.Items.Refresh();
             }
             catch (NullReferenceException ex)
             {
-                MessageBox.Show("Rellena todos los campos para crear un partido");
+                MessageBox.Show("Algo ha fallado");
             }
 
         }

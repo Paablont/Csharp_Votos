@@ -45,7 +45,7 @@ namespace Csharp_Votos.Domain
                         votes = TOTALPOPULATION - absentionVotes;
 
                     }
-                }catch (FormatException)
+                }catch (FormatException e)
                 {
                     MessageBox.Show("The value of absent votes can not be alphabetic character or void");
                 }
