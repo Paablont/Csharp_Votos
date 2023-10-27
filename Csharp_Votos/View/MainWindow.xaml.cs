@@ -107,12 +107,21 @@ namespace Csharp_Votos
         {
             try
             {
-                pm.addParties(tbxAcronym.Text, tbxPartyName.Text, tbxPresidentName.Text);
+                if(dvgParties.Items.Count == 10)
+                {
+                    MessageBox.Show("10 parties have been added to the database. The simulation will begin now: ");
+                    tabControl.SelectedIndex = 2;
+                }
+                else
+                {
+                    pm.addParties(tbxAcronym.Text, tbxPartyName.Text, tbxPresidentName.Text);
+
+                    dvgParties.Items.Refresh();
+                    tbxAcronym.Text = "";
+                    tbxPartyName.Text = "";
+                    tbxPresidentName.Text = "";
+                }
                 
-                dvgParties.Items.Refresh();
-                tbxAcronym.Text = "";
-                tbxPartyName.Text = "";
-                tbxPresidentName.Text = "";
             }
             catch(NullReferenceException ex)
             {
