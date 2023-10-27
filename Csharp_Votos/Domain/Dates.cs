@@ -12,13 +12,17 @@ namespace Csharp_Votos.Domain
     {
         public const int TOTALPOPULATION = 6921267;
 
-        public int VotesValid { get; set; }
+        public int Votes { get; set; }
         public int VotesAbst { get; set; }
         public int VotesNull { get; set; }
 
+        public int VotesValid { get; set; }
+
+        
+
         public DatesVotes(int votesValid, int votesAbst, int votesNull)
         {
-            VotesValid = votesValid;
+            Votes = votesValid;
             VotesAbst = votesAbst;
             VotesNull = votesNull;
         }
@@ -28,7 +32,7 @@ namespace Csharp_Votos.Domain
         {
         }
 
-        //Calculate the valid votes
+        //Calculate the votes
         public int voteCalculate(String absentString)
         {
             int votes = 0;
@@ -62,9 +66,15 @@ namespace Csharp_Votos.Domain
             return nullvotes;
         }
 
+        //Calculate the valid votes
+        public int votesValidCalculate(int votes,int votesNull)
+        {
+            return votes - votesNull;
+        }
+
         public override string? ToString()
         {
-            return "Valid votes: " + VotesValid +
+            return "Valid votes: " + Votes +
                 "\n" + "Abstent votes: " + VotesAbst +
                 "\n" + "Null votes: " + VotesNull;
         }

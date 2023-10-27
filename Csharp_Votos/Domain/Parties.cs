@@ -14,6 +14,9 @@ namespace Csharp_Votos.Domain
         public String acronym { get; set; }
         public String presidentName {  get; set; }
 
+        public int votesParty {  get; set; }
+        public int seat {  get; set; }
+
         
         //Constructor
         public Parties(string name, string acronym,string presidentName)

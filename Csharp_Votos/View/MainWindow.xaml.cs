@@ -26,9 +26,11 @@ namespace Csharp_Votos
         public DatesVotes datesPre { get; set; }
         Parties party;
         PartiesManager pm { get; set; }
+        int votesValid, votesAbst, votesNull;
+        string absentString;
+        string nullString;
         public MainWindow()
         {
-            
             InitializeComponent(); 
             pm = new PartiesManager();
             datesPre = new DatesVotes();
@@ -50,15 +52,14 @@ namespace Csharp_Votos
         //When click on Button saves data
         private void btnSaveData_Click(object sender, RoutedEventArgs e)
         {
-            int votesValid, votesAbst, votesNull;
-            string absentString = tbxAbsent.Text;
-            string nullString = tbxAbsent.Text;
 
+            absentString = tbxAbsent.Text;
+            nullString = tbxNull.Text;
             votesValid = datesPre.voteCalculate(absentString);
             votesAbst  = int.Parse(tbxAbsent.Text);
             votesNull = datesPre.votesNullCalculate(nullString);
 
-            datesPre.VotesValid = votesValid;
+            datesPre.Votes = votesValid;
             datesPre.VotesAbst = votesAbst;
             datesPre.VotesNull = votesNull;
 
@@ -83,7 +84,7 @@ namespace Csharp_Votos
         //Change the field in null votes
         private void nullVoteChange(object sender, RoutedEventArgs e)
         {
-            string absentString = tbxAbsent.Text;
+            absentString = tbxAbsent.Text;
             tbxNull.Text = datesPre.votesNullCalculate(absentString).ToString();
         }
 
@@ -149,6 +150,9 @@ namespace Csharp_Votos
 
         }
 
+        //*************** THIRD TAB FUNCTIONS *****************
+        
+        //Metodos de calcular 
 
     }
 }
