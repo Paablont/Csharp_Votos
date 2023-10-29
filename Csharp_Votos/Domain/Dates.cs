@@ -51,7 +51,7 @@ namespace Csharp_Votos.Domain
                     }
                 }catch (FormatException e)
                 {
-                    MessageBox.Show("The value of absent votes can not be an alphabetic character");
+                    MessageBox.Show("The value of absent votes can not be alphabetic character");
                 }
                 
             return votes;

@@ -10,6 +10,7 @@ namespace Csharp_Votos.Domain
    
     internal class Parties
     {
+        
         public String name {  get; set; }
         public String acronym { get; set; }
         public String presidentName {  get; set; }

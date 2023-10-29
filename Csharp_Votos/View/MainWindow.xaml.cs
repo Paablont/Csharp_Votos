@@ -58,7 +58,7 @@ namespace Csharp_Votos
             nullString = tbxNull.Text;
             votesValid = datesPre.voteCalculate(absentString);
             votesAbst = int.Parse(tbxAbsent.Text);
-            votesNull = datesPre.votesNullCalculate(nullString);
+            votesNull = datesPre.votesNullCalculate(absentString);
 
             datesPre.Votes = votesValid;
             datesPre.VotesAbst = votesAbst;
@@ -72,6 +72,7 @@ namespace Csharp_Votos
             {
                 //When  you press the button change to the second tab
                 MessageBox.Show("Data save properly");
+                MessageBox.Show(votesValid.ToString());
                 tabControl.SelectedIndex = 1;
             }
 
@@ -166,31 +167,36 @@ namespace Csharp_Votos
         //Start simulation button
         private void startSimulation(object sender, RoutedEventArgs e)
         {
-            dvgVotos.ItemsSource = pm.getListParties();
-            calculateVotesParty();
+            if(tabControl.SelectedItem == tabItem1)
+            {
+                clearSimulation();
+            }
+            else
+            {
+                calculateVotesParty();
+                dvgVotos.ItemsSource = pm.getListParties();
+            }
+            
         }
 
         //Calculate votes to each party
         private void calculateVotesParty()
         {
-            MessageBox.Show(votesValid.ToString());
+            double[] percentages = { 35.25, 24.75, 15.75, 14.25, 3.75, 3.25, 1.5, 0.5, 0.25, 0.25 };
             List<Parties> partyList = pm.getListParties();
-
-            
+            for (int i = 0; i < partyList.Count; i++)
+            {
+                partyList[i].votesParty = (int)Math.Round(votesValid * (percentages[i] / 100));
+            }
 
 
         }
-        /*
-35,25
-24,75
-15,75
-14,25
-3,75
-3,25
-1,5
-0,5
-0,25
-0,25
-*/
+
+        private void clearSimulation()
+        {
+            dvgVotos.ItemsSource = null;
+            dvgVotos.Items.Refresh();
+        }
+        
     }
 }
