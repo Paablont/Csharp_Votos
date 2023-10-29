@@ -19,21 +19,18 @@ namespace Csharp_Votos.Domain
 
         
         //Constructor
-        public Parties(string name, string acronym,string presidentName)
+        public Parties(string acronym,string name,string presidentName, int votesParty, int seat)
         {
             this.name = name;
             this.acronym = acronym;
             this.presidentName = presidentName;
-            
-
-        }
-
-        public Parties(string name,int votesParty,int seat)
-        {
-            this.name = name;
             this.votesParty = votesParty;
             this.seat = seat;
-        }
+
+
+        }   
+
+
 
 
 

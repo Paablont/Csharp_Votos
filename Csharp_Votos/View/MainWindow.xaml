@@ -54,7 +54,7 @@
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="dvgVotos" AutoGenerateColumns="False" IsReadOnly="True" Margin="10,51,10,10" SelectionChanged="dgvPeople_SelectionChanged">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Pary" Binding="{Binding name}" Width="*"/>
+                            <DataGridTextColumn Header="Party" Binding="{Binding name}" Width="*"/>
                             <DataGridTextColumn Header="Votes" Binding="{Binding votesParty}" Width="*"/>
                             <DataGridTextColumn Header="Seats" Binding="{Binding seat}" Width="*"/>
                         </DataGrid.Columns>

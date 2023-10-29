@@ -31,18 +31,19 @@ namespace Csharp_Votos
         string nullString;
         public MainWindow()
         {
-            InitializeComponent(); 
+            InitializeComponent();
             pm = new PartiesManager();
             datesPre = new DatesVotes();
             this.DataContext = datesPre; //binding
             dvgParties.ItemsSource = pm.getListParties();
+
             Loaded += totalPopulationChange;
-            
+
             //When the tbxAbsent  changes, tbxNull refresh with update null vote count
             tbxAbsent.TextChanged += nullVoteChange;
 
             //Disable delete button from the 2nd tab
-            
+
             btnDeleteParty.Visibility = Visibility.Hidden;
 
         }
@@ -56,14 +57,15 @@ namespace Csharp_Votos
             absentString = tbxAbsent.Text;
             nullString = tbxNull.Text;
             votesValid = datesPre.voteCalculate(absentString);
-            votesAbst  = int.Parse(tbxAbsent.Text);
+            votesAbst = int.Parse(tbxAbsent.Text);
             votesNull = datesPre.votesNullCalculate(nullString);
 
             datesPre.Votes = votesValid;
             datesPre.VotesAbst = votesAbst;
             datesPre.VotesNull = votesNull;
 
-            if(datesPre.VotesAbst == 0) {
+            if (datesPre.VotesAbst == 0)
+            {
                 MessageBox.Show("The absent votes can not be 0");
             }
             else
@@ -72,8 +74,8 @@ namespace Csharp_Votos
                 MessageBox.Show("Data save properly");
                 tabControl.SelectedIndex = 1;
             }
-           
-            
+
+
         }
 
         //Change the field in total Population 
@@ -89,13 +91,13 @@ namespace Csharp_Votos
         }
 
         //*************** SECOND TAB FUNCTIONS *****************//
-        
+
         //Select one field in the Datagrid
         private void dgvPeople_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             btnDeleteParty.Visibility = Visibility.Visible;
 
-            if(dvgParties.SelectedItem == null )
+            if (dvgParties.SelectedItem == null)
             {
                 btnDeleteParty.Visibility = Visibility.Hidden;
 
@@ -113,27 +115,31 @@ namespace Csharp_Votos
         {
             try
             {
-                if(dvgParties.Items.Count == 10)
+                if (dvgParties.Items.Count == 10)
                 {
                     MessageBox.Show("10 parties have been added to the database. The simulation will begin now: ");
                     tabControl.SelectedIndex = 2;
+                    
+                    dvgVotos.Items.Refresh();
                 }
                 else
                 {
                     pm.addParties(tbxAcronym.Text, tbxPartyName.Text, tbxPresidentName.Text);
 
                     dvgParties.Items.Refresh();
+                    /*
                     tbxAcronym.Text = "";
                     tbxPartyName.Text = "";
                     tbxPresidentName.Text = "";
+                    */
                 }
-                
+
             }
-            catch(NullReferenceException ex)
+            catch (NullReferenceException ex)
             {
                 MessageBox.Show("Algo ha fallado");
             }
-            
+
         }
 
         //Button that delete a new party to the datagrid
@@ -156,17 +162,35 @@ namespace Csharp_Votos
         }
 
         //*************** THIRD TAB FUNCTIONS *****************
-        
+
         //Start simulation button
         private void startSimulation(object sender, RoutedEventArgs e)
         {
-
+            dvgVotos.ItemsSource = pm.getListParties();
+            calculateVotesParty();
         }
 
         //Calculate votes to each party
         private void calculateVotesParty()
         {
+            MessageBox.Show(votesValid.ToString());
+            List<Parties> partyList = pm.getListParties();
+
+            
+
 
         }
+        /*
+35,25
+24,75
+15,75
+14,25
+3,75
+3,25
+1,5
+0,5
+0,25
+0,25
+*/
     }
 }

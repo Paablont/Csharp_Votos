@@ -35,17 +35,17 @@ namespace Csharp_Votos.Persistence.Manages
             {
                 if(acronym.Equals("") || name.Equals("") || presidentName.Equals(""))
                 {
-                    MessageBox.Show("Por favor, rellena todos los campos");
+                    MessageBox.Show("Please fill all the fields");
 
                 }
                 else
                 {
-                    listParties.Add(new Parties(acronym, name, presidentName));
+                    listParties.Add(new Parties(acronym, name, presidentName,0,0));
                 }
             }
             catch(Exception ex)
             {
-                Console.WriteLine("Algo ha fallado");
+                MessageBox.Show("Something was wrong");
             }
             
         }
@@ -54,5 +54,6 @@ namespace Csharp_Votos.Persistence.Manages
         {
             listParties.Remove(p);
         }
+
     }
 }

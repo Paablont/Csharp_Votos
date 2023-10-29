@@ -42,7 +42,7 @@ namespace Csharp_Votos.Domain
                     int absentionVotes = int.Parse(absentString);
                     if (absentionVotes >= TOTALPOPULATION)
                     {
-                        MessageBox.Show("The value of absention votes cant be less than 0 or greater than total population");
+                        MessageBox.Show("The absetion votes values can not be higher than total population");
                     }
                     else
                     {
@@ -51,7 +51,7 @@ namespace Csharp_Votos.Domain
                     }
                 }catch (FormatException e)
                 {
-                    MessageBox.Show("The value of absent votes can not be alphabetic character or void");
+                    MessageBox.Show("The value of absent votes can not be an alphabetic character");
                 }
                 
             return votes;
