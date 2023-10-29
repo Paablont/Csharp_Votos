@@ -103,6 +103,11 @@ namespace Csharp_Votos
 
         }
 
+        private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
         //Button that add a new party to the datagrid
         private void btnSaveParty_Click(object sender, RoutedEventArgs e)
         {
@@ -131,7 +136,7 @@ namespace Csharp_Votos
             
         }
 
-        //Button that add a new party to the datagrid
+        //Button that delete a new party to the datagrid
         private void btnDeleteParty_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -152,7 +157,16 @@ namespace Csharp_Votos
 
         //*************** THIRD TAB FUNCTIONS *****************
         
-        //Metodos de calcular 
+        //Start simulation button
+        private void startSimulation(object sender, RoutedEventArgs e)
+        {
 
+        }
+
+        //Calculate votes to each party
+        private void calculateVotesParty()
+        {
+
+        }
     }
 }

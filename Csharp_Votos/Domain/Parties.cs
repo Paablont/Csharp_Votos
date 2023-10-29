@@ -28,6 +28,15 @@ namespace Csharp_Votos.Domain
 
         }
 
+        public Parties(string name,int votesParty,int seat)
+        {
+            this.name = name;
+            this.votesParty = votesParty;
+            this.seat = seat;
+        }
+
+
+
         
 
 

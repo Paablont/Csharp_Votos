@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Ventana Principal" Height="450" Width="800">
     <Grid Margin="0,0,0,-6">
-        <TabControl Margin="125,68,80,15" TabStripPlacement="Left" Name="tabControl">
+        <TabControl Margin="125,68,80,15" TabStripPlacement="Left" Name="tabControl" SelectionChanged="tabControl_SelectionChanged">
             <TabItem Header="Previuos Data" Height="24" Margin="-2,-2,0,0" VerticalAlignment="Top">
                 <Grid>
                     <Label x:Name="txtPopulation" Content="Population" HorizontalAlignment="Left" Margin="80,52,0,0" VerticalAlignment="Top"/>
@@ -51,7 +51,18 @@
 
             </TabItem>
             <TabItem Header="Simulation" IsEnabled="False">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dvgVotos" AutoGenerateColumns="False" IsReadOnly="True" Margin="10,51,10,10" SelectionChanged="dgvPeople_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Pary" Binding="{Binding name}" Width="*"/>
+                            <DataGridTextColumn Header="Votes" Binding="{Binding votesParty}" Width="*"/>
+                            <DataGridTextColumn Header="Seats" Binding="{Binding seat}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button x:Name="btnSimulate" Content="Simulate" HorizontalAlignment="Left" Margin="32,10,0,0" VerticalAlignment="Top" Height="31" Width="131" Click="startSimulation"/>
+                    <TextBox x:Name="txbSeats" HorizontalAlignment="Left" Margin="236,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="58" Height="24"/>
+                    <Label x:Name="txtSeats" Content="Seats: " HorizontalAlignment="Left" Margin="193,12,0,0" VerticalAlignment="Top"/>
+                </Grid>
             </TabItem>
         </TabControl>
         <Label Content="MADRID ELECTIONS" HorizontalAlignment="Left" Margin="328,10,0,0" VerticalAlignment="Top" FontSize="36" FontFamily="Segoe UI Semibold"/>
