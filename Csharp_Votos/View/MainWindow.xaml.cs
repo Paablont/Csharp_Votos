@@ -26,7 +26,7 @@ namespace Csharp_Votos
         public DatesVotes datesPre { get; set; }
         Parties party;
         PartiesManager pm { get; set; }
-        int votesValid, votesAbst, votesNull;
+        int peopleThatVote, votesAbst, votesNull;
         string absentString;
         string nullString;
         public MainWindow()
@@ -56,11 +56,11 @@ namespace Csharp_Votos
 
             absentString = tbxAbsent.Text;
             nullString = tbxNull.Text;
-            votesValid = datesPre.voteCalculate(absentString);
+            peopleThatVote = datesPre.calculatePeopleThatVote(absentString);
             votesAbst = int.Parse(tbxAbsent.Text);
             votesNull = datesPre.votesNullCalculate(absentString);
 
-            datesPre.Votes = votesValid;
+            datesPre.PeopleThatVote = peopleThatVote;
             datesPre.VotesAbst = votesAbst;
             datesPre.VotesNull = votesNull;
 
@@ -72,7 +72,7 @@ namespace Csharp_Votos
             {
                 //When  you press the button change to the second tab
                 MessageBox.Show("Data save properly");
-                MessageBox.Show(votesValid.ToString());
+                MessageBox.Show(peopleThatVote.ToString());
                 tabControl.SelectedIndex = 1;
             }
 
@@ -186,7 +186,7 @@ namespace Csharp_Votos
             List<Parties> partyList = pm.getListParties();
             for (int i = 0; i < partyList.Count; i++)
             {
-                partyList[i].votesParty = (int)Math.Round(votesValid * (percentages[i] / 100));
+                partyList[i].votesParty = (int)Math.Round(peopleThatVote * (percentages[i] / 100));
             }
 
 

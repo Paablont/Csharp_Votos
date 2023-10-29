@@ -12,7 +12,7 @@ namespace Csharp_Votos.Domain
     {
         public const int TOTALPOPULATION = 6921267;
 
-        public int Votes { get; set; }
+        public int PeopleThatVote { get; set; }
         public int VotesAbst { get; set; }
         public int VotesNull { get; set; }
 
@@ -22,7 +22,7 @@ namespace Csharp_Votos.Domain
 
         public DatesVotes(int votesValid, int votesAbst, int votesNull)
         {
-            Votes = votesValid;
+            PeopleThatVote = votesValid;
             VotesAbst = votesAbst;
             VotesNull = votesNull;
         }
@@ -32,10 +32,10 @@ namespace Csharp_Votos.Domain
         {
         }
 
-        //Calculate the votes
-        public int voteCalculate(String absentString)
+        //Calculate the peopleThatVote
+        public int calculatePeopleThatVote(String absentString)
         {
-            int votes = 0;
+            int people = 0;
             
                 try
                 {
@@ -46,7 +46,7 @@ namespace Csharp_Votos.Domain
                     }
                     else
                     {
-                        votes = TOTALPOPULATION - absentionVotes;
+                        people = TOTALPOPULATION - absentionVotes;
 
                     }
                 }catch (FormatException e)
@@ -54,14 +54,14 @@ namespace Csharp_Votos.Domain
                     MessageBox.Show("The value of absent votes can not be alphabetic character");
                 }
                 
-            return votes;
+            return people;
 
         }
         //Calculate the null votes        
-        public int votesNullCalculate(String nullString)
+        public int votesNullCalculate(String absentString)
         {
-            int votes = voteCalculate(nullString);
-            int nullvotes = votes / 20;
+            int people = calculatePeopleThatVote(absentString);
+            int nullvotes = people / 20;
 
             return nullvotes;
         }
@@ -74,7 +74,7 @@ namespace Csharp_Votos.Domain
 
         public override string? ToString()
         {
-            return "Valid votes: " + Votes +
+            return "Valid votes: " + PeopleThatVote +
                 "\n" + "Abstent votes: " + VotesAbst +
                 "\n" + "Null votes: " + VotesNull;
         }
