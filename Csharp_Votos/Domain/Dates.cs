@@ -61,15 +61,15 @@ namespace Csharp_Votos.Domain
         public int votesNullCalculate(String absentString)
         {
             int people = calculatePeopleThatVote(absentString);
-            int nullvotes = people / 20;
+            int nullvotes =(people / 20);
 
             return nullvotes;
         }
 
         //Calculate the valid votes
-        public int votesValidCalculate(int votes,int votesNull)
+        public int votesValidCalculate(int peopleThatVote,int votesNull)
         {
-            return votes - votesNull;
+            return peopleThatVote - votesNull;
         }
 
         public override string? ToString()

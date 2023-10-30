@@ -60,7 +60,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button x:Name="btnSimulate" Content="Simulate" HorizontalAlignment="Left" Margin="32,10,0,0" VerticalAlignment="Top" Height="31" Width="131" Click="startSimulation"/>
-                    <TextBox x:Name="txbSeats" HorizontalAlignment="Left" Margin="236,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="58" Height="24"/>
+                    <TextBox x:Name="tbxSeats" HorizontalAlignment="Left" Margin="236,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="58" Height="24"/>
                     <Label x:Name="txtSeats" Content="Seats: " HorizontalAlignment="Left" Margin="193,12,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>

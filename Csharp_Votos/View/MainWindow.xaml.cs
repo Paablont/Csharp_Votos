@@ -26,9 +26,9 @@ namespace Csharp_Votos
         public DatesVotes datesPre { get; set; }
         Parties party;
         PartiesManager pm { get; set; }
-        int peopleThatVote, votesAbst, votesNull;
-        string absentString;
-        string nullString;
+        int peopleThatVote, votesAbst, votesNull, seatsNumber,votesValid;
+        string absentString, nullString, seatString;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -59,7 +59,7 @@ namespace Csharp_Votos
             peopleThatVote = datesPre.calculatePeopleThatVote(absentString);
             votesAbst = int.Parse(tbxAbsent.Text);
             votesNull = datesPre.votesNullCalculate(absentString);
-
+            votesValid = datesPre.votesValidCalculate(peopleThatVote, votesNull);
             datesPre.PeopleThatVote = peopleThatVote;
             datesPre.VotesAbst = votesAbst;
             datesPre.VotesNull = votesNull;
@@ -120,7 +120,7 @@ namespace Csharp_Votos
                 {
                     MessageBox.Show("10 parties have been added to the database. The simulation will begin now: ");
                     tabControl.SelectedIndex = 2;
-                    
+
                     dvgVotos.Items.Refresh();
                 }
                 else
@@ -167,36 +167,63 @@ namespace Csharp_Votos
         //Start simulation button
         private void startSimulation(object sender, RoutedEventArgs e)
         {
-            if(tabControl.SelectedItem == tabItem1)
-            {
-                clearSimulation();
-            }
-            else
-            {
-                calculateVotesParty();
-                dvgVotos.ItemsSource = pm.getListParties();
-            }
-            
+
+            calculateVotesParty();
+            //calculateStands(pm.getListParties());
+            dvgVotos.ItemsSource = pm.getListParties();
+            dvgVotos.Items.Refresh();
+
         }
 
-        //Calculate votes to each party
+        //Calculate votes to each party (pasar a clase PartiesManager¿?)
         private void calculateVotesParty()
         {
             double[] percentages = { 35.25, 24.75, 15.75, 14.25, 3.75, 3.25, 1.5, 0.5, 0.25, 0.25 };
             List<Parties> partyList = pm.getListParties();
             for (int i = 0; i < partyList.Count; i++)
             {
-                partyList[i].votesParty = (int)Math.Round(peopleThatVote * (percentages[i] / 100));
+                partyList[i].votesParty = (int)Math.Round(votesValid * (percentages[i] / 100));
             }
 
 
         }
 
-        private void clearSimulation()
+        //Calculate stands to each party (pasar a clase PartiesManager¿?)
+        private void calculateStands(List<Parties> partyList)
         {
-            dvgVotos.ItemsSource = null;
-            dvgVotos.Items.Refresh();
+            try
+            {
+
+                seatString = tbxSeats.Text;
+                seatsNumber = int.Parse(seatString);
+                int[] votesPartyArray = new int[10];
+                int posMaxValue;
+                int maxVotes;
+                foreach (int i in votesPartyArray)
+                {
+                    votesPartyArray[i] = partyList[i].votesParty;
+                }
+
+                for (int i = 0; i < seatsNumber; i++)
+                {
+                    maxVotes = votesPartyArray.Max();
+                    posMaxValue = Array.IndexOf(votesPartyArray, maxVotes);
+                    //MessageBox.Show("El partido número " + posMaxValue.ToString() + " tiene " + maxVotes.ToString() + " votos ");
+
+                    partyList[posMaxValue].seat += 1;
+                    partyList[posMaxValue].votesParty = maxVotes / 2;
+                    votesPartyArray[posMaxValue] = partyList[posMaxValue].votesParty;
+                }
+            }
+            catch (FormatException e)
+            {
+                MessageBox.Show("The value of seats can not be alphabetic character");
+            }
+
+
         }
-        
+
+
+
     }
 }
