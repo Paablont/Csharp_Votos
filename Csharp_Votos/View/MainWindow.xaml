@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Ventana Principal" Height="450" Width="800">
     <Grid Margin="0,0,0,-6">
-        <TabControl Margin="125,68,80,15" TabStripPlacement="Left" Name="tabControl" SelectionChanged="tabControl_SelectionChanged">
+        <TabControl Margin="125,68,80,15" TabStripPlacement="Left" x:Name="tbControlMenu" SelectionChanged="tabControl_SelectionChanged">
             <TabItem x:Name="tabItem1" Header="Previuos Data" Height="24" Margin="-2,-2,0,0" VerticalAlignment="Top">
                 <Grid>
                     <Label x:Name="txtPopulation" Content="Population" HorizontalAlignment="Left" Margin="80,52,0,0" VerticalAlignment="Top"/>
@@ -20,7 +20,7 @@
 
                 </Grid>
             </TabItem>
-            <TabItem x:Name="tabItem2" Header="Parties Managment" IsEnabled="False">
+            <TabItem x:Name="tabItem2" Header="Parties Managment" IsEnabled="True">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="dgvPeople" AutoGenerateColumns="False" IsReadOnly="True" Margin="10,10,207,10" SelectionChanged="dgvPeople_SelectionChanged">
                         <DataGrid.Columns>
@@ -50,7 +50,7 @@
                 </Grid>
 
             </TabItem>
-            <TabItem x:Name="tabItem3" Header="Simulation" IsEnabled="False">
+            <TabItem x:Name="tabItem3" Header="Simulation" IsEnabled="True">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="dvgVotos" AutoGenerateColumns="False" IsReadOnly="True" Margin="10,51,10,10" SelectionChanged="dgvPeople_SelectionChanged">
                         <DataGrid.Columns>

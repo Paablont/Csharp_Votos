@@ -26,7 +26,7 @@ namespace Csharp_Votos
         public DatesVotes datesPre { get; set; }
         Parties party;
         PartiesManager pm { get; set; }
-        int peopleThatVote, votesAbst, votesNull, seatsNumber,votesValid;
+        int peopleThatVote, votesAbst, votesNull, seatsNumber, votesValid;
         string absentString, nullString, seatString;
 
         public MainWindow()
@@ -43,9 +43,18 @@ namespace Csharp_Votos
             tbxAbsent.TextChanged += nullVoteChange;
 
             //Disable delete button from the 2nd tab
-
             btnDeleteParty.Visibility = Visibility.Hidden;
 
+        }
+
+        //*************** TAB CONTROL FUNCTIONS *************** // 
+        private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(tbControlMenu.SelectedIndex == 0 || tbControlMenu.SelectedIndex == 1)
+            {
+                dvgVotos.ItemsSource = null;
+                dvgVotos.Items.Refresh();
+            }
         }
 
         //*************** FIRST TAB FUNCTIONS *****************//
@@ -73,7 +82,7 @@ namespace Csharp_Votos
                 //When  you press the button change to the second tab
                 MessageBox.Show("Data save properly");
                 MessageBox.Show(peopleThatVote.ToString());
-                tabControl.SelectedIndex = 1;
+                tbControlMenu.SelectedIndex = 1;
             }
 
 
@@ -106,10 +115,7 @@ namespace Csharp_Votos
 
         }
 
-        private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
 
-        }
 
         //Button that add a new party to the datagrid
         private void btnSaveParty_Click(object sender, RoutedEventArgs e)
@@ -119,8 +125,7 @@ namespace Csharp_Votos
                 if (dvgParties.Items.Count == 10)
                 {
                     MessageBox.Show("10 parties have been added to the database. The simulation will begin now: ");
-                    tabControl.SelectedIndex = 2;
-
+                    tbControlMenu.SelectedIndex = 2;
                     dvgVotos.Items.Refresh();
                 }
                 else
@@ -167,12 +172,29 @@ namespace Csharp_Votos
         //Start simulation button
         private void startSimulation(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                seatString = tbxSeats.Text;
+                seatsNumber = int.Parse(seatString);
 
-            calculateVotesParty();
-            //calculateStands(pm.getListParties());
-            dvgVotos.ItemsSource = pm.getListParties();
-            dvgVotos.Items.Refresh();
+                if (seatsNumber <= 0)
+                {
+                    MessageBox.Show("The value of seats can not be less or equals to 0");
 
+
+                }
+                else
+                {
+                    dvgVotos.ItemsSource = pm.getListParties();
+                    dvgVotos.Items.Refresh();
+                    calculateVotesParty();
+                    //calculateStands(pm.getListParties());
+                }
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("The value of seats can not be alphabetic character");
+            }
         }
 
         //Calculate votes to each party (pasar a clase PartiesManager¿?)
@@ -189,36 +211,31 @@ namespace Csharp_Votos
         }
 
         //Calculate stands to each party (pasar a clase PartiesManager¿?)
-        private void calculateStands(List<Parties> partyList)
+        private void calculateStands(List<Parties> partyList, int seatsNumber)
         {
-            try
+
+
+
+            int[] votesPartyArray = new int[10];
+            int posMaxValue;
+            int maxVotes;
+            foreach (int i in votesPartyArray)
             {
-
-                seatString = tbxSeats.Text;
-                seatsNumber = int.Parse(seatString);
-                int[] votesPartyArray = new int[10];
-                int posMaxValue;
-                int maxVotes;
-                foreach (int i in votesPartyArray)
-                {
-                    votesPartyArray[i] = partyList[i].votesParty;
-                }
-
-                for (int i = 0; i < seatsNumber; i++)
-                {
-                    maxVotes = votesPartyArray.Max();
-                    posMaxValue = Array.IndexOf(votesPartyArray, maxVotes);
-                    //MessageBox.Show("El partido número " + posMaxValue.ToString() + " tiene " + maxVotes.ToString() + " votos ");
-
-                    partyList[posMaxValue].seat += 1;
-                    partyList[posMaxValue].votesParty = maxVotes / 2;
-                    votesPartyArray[posMaxValue] = partyList[posMaxValue].votesParty;
-                }
+                votesPartyArray[i] = partyList[i].votesParty;
             }
-            catch (FormatException e)
+
+            for (int i = 0; i < seatsNumber; i++)
             {
-                MessageBox.Show("The value of seats can not be alphabetic character");
+                maxVotes = votesPartyArray.Max();
+                posMaxValue = Array.IndexOf(votesPartyArray, maxVotes);
+                //MessageBox.Show("El partido número " + posMaxValue.ToString() + " tiene " + maxVotes.ToString() + " votos ");
+
+                partyList[posMaxValue].seat += 1;
+                partyList[posMaxValue].votesParty = maxVotes / 2;
+                votesPartyArray[posMaxValue] = partyList[posMaxValue].votesParty;
+
             }
+
 
 
         }
