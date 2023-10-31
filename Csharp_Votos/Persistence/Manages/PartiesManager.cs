@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
 
+
 namespace Csharp_Votos.Persistence.Manages
 {
-    
+
     internal class PartiesManager
     {
-        public List<Parties> listParties { get; set; }        
+        public List<Parties> listParties { get; set; }
 
         public PartiesManager()
         {
@@ -29,25 +30,25 @@ namespace Csharp_Votos.Persistence.Manages
         {
             listParties = newList;
         }
-        public void addParties(string acronym, string name,string presidentName)
+        public void addParties(string acronym, string name, string presidentName)
         {
             try
             {
-                if(acronym.Equals("") || name.Equals("") || presidentName.Equals(""))
+                if (acronym.Equals("") || name.Equals("") || presidentName.Equals(""))
                 {
                     MessageBox.Show("Please fill all the fields");
 
                 }
                 else
                 {
-                    listParties.Add(new Parties(acronym, name, presidentName,0,0));
+                    listParties.Add(new Parties(acronym, name, presidentName, 0, 0));
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Something was wrong");
             }
-            
+
         }
 
         public void deleteParties(Parties p)
@@ -55,5 +56,36 @@ namespace Csharp_Votos.Persistence.Manages
             listParties.Remove(p);
         }
 
+
+        //Calculate the votes each party has
+        public void calculateVotesParty(int votesValid, List<Parties> partyList)
+        {
+            double[] percentages = { 35.25, 24.75, 15.75, 14.25, 3.75, 3.25, 1.5, 0.5, 0.25, 0.25 };
+
+            for (int i = 0; i < partyList.Count; i++)
+            {
+                partyList[i].votesParty = (int)Math.Round(votesValid * (percentages[i] / 100));
+            }
+
+
+        }
+
+        //Calculate stands to each party (pasar a clase PartiesManager¿?)
+        public void calculateStands(List<Parties> partyList, int seatsNumber)
+        {
+            int[] votesPartyArray = new int[10];
+            int posMaxValue, maxVotes;
+
+
+                        
+            for (int i = 0; i < seatsNumber; i++)
+            {
+                maxVotes = partyList.Max(x => x.votesParty);
+                posMaxValue = partyList.FindIndex(p => p.votesParty == maxVotes);
+                partyList[posMaxValue].seat += 1;
+                partyList[posMaxValue].votesParty  /= partyList[posMaxValue].seat;
+            }
+            
+        }
     }
 }

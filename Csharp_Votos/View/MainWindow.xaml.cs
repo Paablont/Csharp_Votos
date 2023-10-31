@@ -25,6 +25,7 @@ namespace Csharp_Votos
     {
         public DatesVotes datesPre { get; set; }
         Parties party;
+        List<Parties> partyList;
         PartiesManager pm { get; set; }
         int peopleThatVote, votesAbst, votesNull, seatsNumber, votesValid;
         string absentString, nullString, seatString;
@@ -36,7 +37,7 @@ namespace Csharp_Votos
             datesPre = new DatesVotes();
             this.DataContext = datesPre; //binding
             dvgParties.ItemsSource = pm.getListParties();
-
+            partyList = pm.getListParties();
             Loaded += totalPopulationChange;
 
             //When the tbxAbsent  changes, tbxNull refresh with update null vote count
@@ -48,12 +49,16 @@ namespace Csharp_Votos
         }
 
         //*************** TAB CONTROL FUNCTIONS *************** // 
+
+        //When press tab 1, clear the data from the datagrid on tab 3
         private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(tbControlMenu.SelectedIndex == 0 || tbControlMenu.SelectedIndex == 1)
+            
+            if(tbControlMenu.SelectedIndex == 0)
             {
                 dvgVotos.ItemsSource = null;
                 dvgVotos.Items.Refresh();
+                tabItem3.IsEnabled = false;
             }
         }
 
@@ -81,8 +86,9 @@ namespace Csharp_Votos
             {
                 //When  you press the button change to the second tab
                 MessageBox.Show("Data save properly");
-                MessageBox.Show(peopleThatVote.ToString());
+                //MessageBox.Show(peopleThatVote.ToString());
                 tbControlMenu.SelectedIndex = 1;
+                tabItem2.IsEnabled = true;
             }
 
 
@@ -127,6 +133,8 @@ namespace Csharp_Votos
                     MessageBox.Show("10 parties have been added to the database. The simulation will begin now: ");
                     tbControlMenu.SelectedIndex = 2;
                     dvgVotos.Items.Refresh();
+                    
+                    tabItem3.IsEnabled = true;
                 }
                 else
                 {
@@ -172,10 +180,12 @@ namespace Csharp_Votos
         //Start simulation button
         private void startSimulation(object sender, RoutedEventArgs e)
         {
+             
             try
             {
                 seatString = tbxSeats.Text;
                 seatsNumber = int.Parse(seatString);
+                partyList = pm.getListParties();
 
                 if (seatsNumber <= 0)
                 {
@@ -187,8 +197,9 @@ namespace Csharp_Votos
                 {
                     dvgVotos.ItemsSource = pm.getListParties();
                     dvgVotos.Items.Refresh();
-                    calculateVotesParty();
-                    //calculateStands(pm.getListParties());
+                    pm.calculateVotesParty(votesValid,partyList);
+                    pm.calculateStands(partyList, seatsNumber);
+                    
                 }
             }
             catch (FormatException)
@@ -197,48 +208,10 @@ namespace Csharp_Votos
             }
         }
 
-        //Calculate votes to each party (pasar a clase PartiesManager¿?)
-        private void calculateVotesParty()
-        {
-            double[] percentages = { 35.25, 24.75, 15.75, 14.25, 3.75, 3.25, 1.5, 0.5, 0.25, 0.25 };
-            List<Parties> partyList = pm.getListParties();
-            for (int i = 0; i < partyList.Count; i++)
-            {
-                partyList[i].votesParty = (int)Math.Round(votesValid * (percentages[i] / 100));
-            }
+       
+        
 
-
-        }
-
-        //Calculate stands to each party (pasar a clase PartiesManager¿?)
-        private void calculateStands(List<Parties> partyList, int seatsNumber)
-        {
-
-
-
-            int[] votesPartyArray = new int[10];
-            int posMaxValue;
-            int maxVotes;
-            foreach (int i in votesPartyArray)
-            {
-                votesPartyArray[i] = partyList[i].votesParty;
-            }
-
-            for (int i = 0; i < seatsNumber; i++)
-            {
-                maxVotes = votesPartyArray.Max();
-                posMaxValue = Array.IndexOf(votesPartyArray, maxVotes);
-                //MessageBox.Show("El partido número " + posMaxValue.ToString() + " tiene " + maxVotes.ToString() + " votos ");
-
-                partyList[posMaxValue].seat += 1;
-                partyList[posMaxValue].votesParty = maxVotes / 2;
-                votesPartyArray[posMaxValue] = partyList[posMaxValue].votesParty;
-
-            }
-
-
-
-        }
+        
 
 
 

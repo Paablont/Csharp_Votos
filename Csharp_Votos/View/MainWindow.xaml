@@ -20,7 +20,7 @@
 
                 </Grid>
             </TabItem>
-            <TabItem x:Name="tabItem2" Header="Parties Managment" IsEnabled="True">
+            <TabItem x:Name="tabItem2" Header="Parties Managment" IsEnabled="False">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="dgvPeople" AutoGenerateColumns="False" IsReadOnly="True" Margin="10,10,207,10" SelectionChanged="dgvPeople_SelectionChanged">
                         <DataGrid.Columns>
@@ -50,7 +50,7 @@
                 </Grid>
 
             </TabItem>
-            <TabItem x:Name="tabItem3" Header="Simulation" IsEnabled="True">
+            <TabItem x:Name="tabItem3" Header="Simulation" IsEnabled="False">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="dvgVotos" AutoGenerateColumns="False" IsReadOnly="True" Margin="10,51,10,10" SelectionChanged="dgvPeople_SelectionChanged">
                         <DataGrid.Columns>
