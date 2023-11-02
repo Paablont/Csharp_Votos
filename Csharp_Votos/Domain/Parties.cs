@@ -16,6 +16,8 @@ namespace Csharp_Votos.Domain
         public String presidentName {  get; set; }
 
         public int votesParty {  get; set; }
+
+        //I use this aux variable to calculate the seats for each party
         public int votesPartyAux {  get; set; }
         public int seat {  get; set; }
 

@@ -57,7 +57,7 @@ namespace Csharp_Votos.Persistence.Manages
         }
 
 
-        //Calculate the votes each party has
+        //Calculate the votes to each party
         public void calculateVotesParty(int votesValid, List<Parties> partyList)
         {
             double[] percentages = { 35.25, 24.75, 15.75, 14.25, 3.75, 3.25, 1.5, 0.5, 0.25, 0.25 };

@@ -147,17 +147,18 @@ namespace Csharp_Votos
                     pm.addParties(tbxAcronym.Text, tbxPartyName.Text, tbxPresidentName.Text);
 
                     dvgParties.Items.Refresh();
-                    /*
+                    
+                    
                     tbxAcronym.Text = "";
                     tbxPartyName.Text = "";
                     tbxPresidentName.Text = "";
-                    */
+                    
                 }
 
             }
             catch (NullReferenceException ex)
             {
-                MessageBox.Show("Algo ha fallado");
+                MessageBox.Show("Something was wrong");
             }
 
         }
@@ -176,7 +177,7 @@ namespace Csharp_Votos
             }
             catch (NullReferenceException ex)
             {
-                MessageBox.Show("Algo ha fallado");
+                MessageBox.Show("Something was wrong");
             }
 
         }
@@ -210,7 +211,7 @@ namespace Csharp_Votos
             }
             catch (FormatException)
             {
-                MessageBox.Show("The value of seats can not be alphabetic character");
+                MessageBox.Show("The value of seats can not be alphabetic character or 0");
             }
         }
 
