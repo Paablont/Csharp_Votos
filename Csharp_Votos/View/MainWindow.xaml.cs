@@ -50,16 +50,21 @@ namespace Csharp_Votos
 
         //*************** TAB CONTROL FUNCTIONS *************** // 
 
-        //When press tab 1, clear the data from the datagrid on tab 3
+        //When press tab 1 or tab 2, clear the data from the datagrid on tab 3
         private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
-            if(tbControlMenu.SelectedIndex == 0)
+            if(tbControlMenu.SelectedIndex == 0 || tbControlMenu.SelectedIndex == 1)
             {
                 dvgVotos.ItemsSource = null;
                 dvgVotos.Items.Refresh();
                 tabItem3.IsEnabled = false;
-                partyList.Clear();
+                foreach(Parties p in pm.getListParties())
+                {
+                    p.seat = 0;
+                    p.votesPartyAux = 0;
+                    p.votesParty = 0;
+                }
             }
         }
 
