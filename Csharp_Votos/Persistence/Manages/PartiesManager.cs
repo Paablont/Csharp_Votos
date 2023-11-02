@@ -41,7 +41,7 @@ namespace Csharp_Votos.Persistence.Manages
                 }
                 else
                 {
-                    listParties.Add(new Parties(acronym, name, presidentName, 0, 0));
+                    listParties.Add(new Parties(acronym, name, presidentName, 0, 0,0));
                 }
             }
             catch (Exception ex)
@@ -65,6 +65,8 @@ namespace Csharp_Votos.Persistence.Manages
             for (int i = 0; i < partyList.Count; i++)
             {
                 partyList[i].votesParty = (int)Math.Round(votesValid * (percentages[i] / 100));
+                partyList[i].votesPartyAux = (int)Math.Round(votesValid * (percentages[i] / 100));
+                   
             }
 
 
@@ -73,19 +75,21 @@ namespace Csharp_Votos.Persistence.Manages
         //Calculate stands to each party (pasar a clase PartiesManager¿?)
         public void calculateStands(List<Parties> partyList, int seatsNumber)
         {
-            int[] votesPartyArray = new int[10];
+            
             int posMaxValue, maxVotes;
-
-
-                        
+            
             for (int i = 0; i < seatsNumber; i++)
             {
-                maxVotes = partyList.Max(x => x.votesParty);
-                posMaxValue = partyList.FindIndex(p => p.votesParty == maxVotes);
+                maxVotes = partyList.Max(x => x.votesPartyAux);
+                posMaxValue = partyList.FindIndex(p => p.votesPartyAux == maxVotes);
                 partyList[posMaxValue].seat += 1;
-                partyList[posMaxValue].votesParty  /= partyList[posMaxValue].seat;
+                partyList[posMaxValue].votesPartyAux  = partyList[posMaxValue].votesParty/ (partyList[posMaxValue].seat + 1);
+
             }
             
         }
+
+        
+
     }
 }

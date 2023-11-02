@@ -59,6 +59,7 @@ namespace Csharp_Votos
                 dvgVotos.ItemsSource = null;
                 dvgVotos.Items.Refresh();
                 tabItem3.IsEnabled = false;
+                partyList.Clear();
             }
         }
 
